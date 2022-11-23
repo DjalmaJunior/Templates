@@ -14,16 +14,16 @@ export default class Authenticator {
     if (!token) throw new MissingParamError("Authenticator's token");
     if (!this.authKey || !this.authOptions) throw new MissingParamError("Authenticator's key or options");
 
-    const verifyPromise: any = promisify(jwt.verify);
+    const verifyPromise: (propToken: string, propKey: string) => Promise<AnyValue> = promisify(jwt.verify);
 
-    return verifyPromise(token, this.authKey);
+    return verifyPromise(token, this.authKey) as Promise<ITokenPayload>;
   }
 
   async generateToken (payload: ITokenPayload) {
     if (!payload) throw new MissingParamError("Authenticator's payload");
     if (!this.authKey || !this.authOptions) throw new MissingParamError("Authenticator's key or options");
 
-    const signPromise: any = promisify(jwt.sign);
+    const signPromise: (payload: string | object | Buffer, secretOrPrivateKey: jwt.Secret, options?: jwt.SignOptions | undefined) => Promise<string | void> = promisify(jwt.sign);
 
     return signPromise(payload, this.authKey, this.authOptions)
   }

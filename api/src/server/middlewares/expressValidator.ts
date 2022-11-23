@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 
 type TError = Error & { statusCode?: number };
 
-export default (err: TError, req: Request, res: Response, next: NextFunction) => {
+export default (err: TError, req: Request, res: Response) => {
   console.error(err.stack);
 
   if (err?.statusCode) {

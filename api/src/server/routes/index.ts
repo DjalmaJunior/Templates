@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Router } from 'express'
 import fastGlob from 'fast-glob'
 import path from 'path'

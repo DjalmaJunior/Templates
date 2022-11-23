@@ -16,7 +16,7 @@ export class ServerRequestError extends Error {
     this.name = 'Internal Server Error';
     this.statusCode = 500;
   }
-};
+}
 
 export class InvalidParamError extends Error {
   statusCode;
