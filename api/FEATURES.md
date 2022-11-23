@@ -26,7 +26,7 @@ List of features to implement
 
 - [x] Tests with jest
 
-- [] Supertest to make tests with API endpoints
+- [x] Supertest to make tests with API endpoints
 
 - [] Husky to run tests and lint before commit
 
