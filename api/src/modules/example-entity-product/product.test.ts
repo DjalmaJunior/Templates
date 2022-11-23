@@ -1,5 +1,8 @@
 import ProductController from "./product.controller";
 import ProductService from "./product.service";
+import request from 'supertest';
+import App from "../../server/app";
+import LoginController from "../public/login/login.controller";
 
 describe('Ensure correct return from product controller', () => {
   it('returns default message without query param', (done) => {
@@ -51,3 +54,32 @@ describe('Ensure correct return from product service', () => {
     done();
   })
 });
+
+describe('Product Router', () => {
+  const auth = {
+    token: ''
+  }
+
+  const makeLogin = async () => {
+    const { token } = await LoginController.login({ login: 'Fulano1', password: '123' })
+
+    auth.token = token as string;
+  }
+
+  it('should receive GET 200 with supertest', (done) => {
+    makeLogin().then(() => {
+      request(App.getApp())
+        .get('/api/example-entity-product')
+        .set('Authorization', 'Bearer ' + auth.token)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+
+          expect(typeof res.body.data === 'string').toBe(true);
+
+          done();
+        });
+    })
+  })
+})
