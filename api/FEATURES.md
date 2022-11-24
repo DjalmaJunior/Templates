@@ -28,6 +28,10 @@ List of features to implement
 
 - [x] Supertest to make tests with API endpoints
 
-- [] Husky to run tests and lint before commit
+- [] Databases
+
+  - [] PostgreSQL
+
+- [x] Husky to run tests and lint before commit
 
 
