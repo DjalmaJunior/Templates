@@ -7,6 +7,7 @@
     "start:prod": "npm run build && node build/server/index.js",
     "start:dev": "nodemon",
     "test": "jest --passWithNoTests --watch",
+    "test-husky": "jest --passWithNoTests",
     "coverage": "jest --coverage",
     "build": "tsc",
     "lint": "eslint . --ext .ts"
