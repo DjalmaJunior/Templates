@@ -38,7 +38,9 @@ export default class User {
         type: SEQUELIZE.DATE
       }
     }, {
-      timestamps: false
+      timestamps: false,
+      tableName: 'user',
+      schema: 'system'
     })
 
     return model
