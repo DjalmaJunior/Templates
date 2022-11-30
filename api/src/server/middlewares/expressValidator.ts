@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 type TError = Error & { statusCode?: number };
 
-export default (err: TError, req: Request, res: Response) => {
+export default (err: TError, req: Request, res: Response, _next: NextFunction) => {
   console.error(err.stack);
 
   if (err?.statusCode) {
@@ -13,7 +13,7 @@ export default (err: TError, req: Request, res: Response) => {
     });
   }
 
-  res.status(500).json({
+  return res.status(500).json({
     message: 'Internal Server Error',
     name: 'InternalServerError',
     statusCode: 500
