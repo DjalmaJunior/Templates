@@ -8,6 +8,10 @@ export default class RegisterController {
     if (!params?.email) throw new BadRequestError('Email is required!');
     if (!params?.password) throw new BadRequestError('Password is required!');
 
+    const emailAlreadyExists = await RegisterService.verifyEmail({ email: params.email })
+
+    if (emailAlreadyExists) throw new BadRequestError('Email already exists!');
+
     return await RegisterService.registerUser(params);
   }
 }

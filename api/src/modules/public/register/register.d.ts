@@ -9,3 +9,7 @@ export interface IParamsServiceRegisterUser {
   email: string;
   password: string;
 }
+
+export interface IParamsVerifyEmail {
+  email: string;
+}
