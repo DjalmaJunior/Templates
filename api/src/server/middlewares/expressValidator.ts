@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 type TError = Error & { statusCode?: number };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (err: TError, req: Request, res: Response, _next: NextFunction) => {
   console.error(err.stack);
 

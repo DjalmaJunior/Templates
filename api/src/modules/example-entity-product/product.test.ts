@@ -2,7 +2,6 @@ import ProductController from "./product.controller";
 import ProductService from "./product.service";
 import request from 'supertest';
 import App from "../../server/app";
-import LoginController from "../public/login/login.controller";
 import Authenticator from "../../services/auth/Authenticator";
 
 describe('Ensure correct return from product controller', () => {
