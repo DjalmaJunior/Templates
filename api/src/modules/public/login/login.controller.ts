@@ -9,14 +9,12 @@ export default class LoginController {
     if (!params?.login) throw new BadRequestError('Login is required!');
     if (!params?.password) throw new BadRequestError('Password is required!');
 
-    const data = LoginService.getUserLogin({ login: params.login });
+    const data = await LoginService.getUserLogin({ login: params.login });
 
     if (!data?.id) throw new NotFoundError('User');
 
-    // temp validation
     const bcryptManager = new BcryptAdapter(12);
-    const encryptedPassword = await bcryptManager.encrypt(data.password);
-    const veriryPass = await bcryptManager.verify(params.password, encryptedPassword);
+    const veriryPass = await bcryptManager.verify(params.password, data.password);
 
     if (!veriryPass) throw new InvalidParamError('Invalid credentials!');
 

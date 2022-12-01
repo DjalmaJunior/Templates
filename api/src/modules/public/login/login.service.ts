@@ -1,23 +1,23 @@
+import Sequelize from "sequelize";
+import User from "../../../databases/sql/postgresql/models/system/user";
 import { IParamsServiceGetUserLogin } from "./login";
 
 export default class LoginService {
-  static getUserLogin (params: IParamsServiceGetUserLogin) {
-    const db = [
-      {
-        id: 1,
-        name: 'Fulano1',
-        email: 'fulano1@email.com',
-        password: '123'
-      },
-      {
-        id: 2,
-        name: 'Fulano2',
-        email: 'fulano2@email.com',
-        password: '123'
-      }
-    ]
+  static async getUserLogin (params: IParamsServiceGetUserLogin) {
+    const UserModel = User.getModel();
 
-    const user = db.find((data) => [data.name, data.email].includes(params.login))
+    const user = (await UserModel.findOne({
+      where: {
+        [Sequelize.Op.or]: [
+          {
+            name: params.login
+          },
+          {
+            email: params.login
+          }
+        ]
+      }
+    }))?.get();
 
     return user;
   }

@@ -3,6 +3,7 @@ import ProductService from "./product.service";
 import request from 'supertest';
 import App from "../../server/app";
 import LoginController from "../public/login/login.controller";
+import Authenticator from "../../services/auth/Authenticator";
 
 describe('Ensure correct return from product controller', () => {
   it('returns default message without query param', (done) => {
@@ -61,7 +62,12 @@ describe('Product Router', () => {
   }
 
   const makeLogin = async () => {
-    const { token } = await LoginController.login({ login: 'Fulano1', password: '123' })
+    const authenticator = new Authenticator();
+    const token = await authenticator.generateToken({
+      id: 0,
+      name: 'UserTest',
+      roles: []
+    });
 
     auth.token = token as string;
   }
