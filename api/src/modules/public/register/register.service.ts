@@ -15,7 +15,10 @@ export default class RegisterService {
       password: hashedPassword
     }
 
-    return (await UserModel.create(data)).get();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userData } = (await UserModel.create(data)).get();
+
+    return userData;
   }
 
   static async verifyEmail (params: IParamsVerifyEmail) {
