@@ -1,0 +1,76 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/public/register": {
+      "post": {
+        "summary": "Add a new user",
+        "tags": ["/public"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An object to register a new user",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "required": true
+                },
+                "email": {
+                  "type": "string",
+                  "required": true
+                },
+                "password": {
+                  "type": "string",
+                  "required": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A user object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "description": "The user ID"
+                },
+                "created_at": {
+                  "type": "string",
+                  "description": "The date of creation"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "description": "The date of update"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The user name"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "The user email"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
