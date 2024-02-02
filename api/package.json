@@ -4,12 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:prod": "npm run build && node build/server/index.js",
+    "start:prod": "npm run build && node -r tsconfig-paths/register dist/server",
     "start:dev": "nodemon",
-    "test": "jest --passWithNoTests --watch",
+    "test": "jest --passWithNoTests --watchAll",
     "test-husky": "jest --passWithNoTests",
     "coverage": "jest --coverage",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "lint": "eslint . --ext .ts"
   },
   "dependencies": {
@@ -40,12 +40,14 @@
     "@typescript-eslint/parser": "^5.44.0",
     "eslint": "^8.28.0",
     "eslint-plugin-jest": "^27.1.5",
-    "husky": "^8.0.2",
+    "husky": "^9.0.10",
     "jest": "^29.3.0",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.1",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^4.8.4"
   }
 }
